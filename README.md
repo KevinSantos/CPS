@@ -5,7 +5,7 @@
 
 ## Hash Function in mining
 1. [How Ethereum Mining Works](https://www.coindesk.com/information/ethereum-mining-works/)
-
+1. [Ethash](https://github.com/ethereum/wiki/wiki/Ethash)
 
 ## Signature Scheme
 
