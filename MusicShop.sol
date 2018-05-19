@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.21;
 
 contract MusicShop{
     
@@ -11,15 +11,15 @@ contract MusicShop{
     address owner;
     mapping(uint => Product) products;
     
-    constructor() payable{
+    function MusicShop() public payable{
         owner = msg.sender;
     }
     
-    function getProduct(uint _productId) constant returns (uint, uint, string){
+    function getProduct(uint _productId) constant public returns (uint, uint, string){
         return (products[_productId].stock, products[_productId].price, products[_productId].name);
     }
     
-    function buyProduct(uint _productId, uint _amount) payable{
+    function buyProduct(uint _productId, uint _amount) public payable{
         require(msg.value == _amount * products[_productId].price);
         decrementStock(_productId, _amount);
     }
@@ -37,18 +37,17 @@ contract MusicShop{
         _;
     }
     
-    function addProduct(uint _productId, uint _stock, uint _price, string _name) onlyOwner{
+    function addProduct(uint _productId, uint _stock, uint _price, string _name) onlyOwner public {
         products[_productId].stock = _stock;
         products[_productId].price = _price;
         products[_productId].name = _name;
     }
     
-    function incrementStock(uint productId, uint amount) onlyOwner{
+    function incrementStock(uint productId, uint amount) onlyOwner public {
         products[productId].stock += amount;
     }
     
-    function closeShop() onlyOwner{
+    function closeShop() onlyOwner public {
         selfdestruct(owner);
     }
 }
-
